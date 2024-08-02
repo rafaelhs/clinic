@@ -24,7 +24,7 @@ class PatientControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
+    @MockBean
     private PatientService patientService;
 
     @Test
