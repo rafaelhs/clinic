@@ -28,7 +28,7 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @RequestMapping()
+    @RequestMapping(path = "/")
     public @ResponseBody String ping() {
         return patientService.message();
     }
@@ -64,6 +64,10 @@ public class PatientController {
             return ResponseEntity.ok().body(res);
         } catch (InvalidDocumentException e) {
             return new ResponseEntity<>("Document is invalid", HttpStatus.BAD_REQUEST);
+        } catch (EmailAlreadyExistsException e) {
+            return new ResponseEntity<>("Email in use", HttpStatus.CONFLICT);
+        } catch (DocumentAlreadyExistsException e) {
+            return new ResponseEntity<>("Document in user", HttpStatus.CONFLICT);
         }
     }
 

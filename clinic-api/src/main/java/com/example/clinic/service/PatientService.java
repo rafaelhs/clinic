@@ -2,6 +2,7 @@ package com.example.clinic.service;
 
 import com.example.clinic.model.Patient;
 import com.example.clinic.repository.PatientRepository;
+import com.example.clinic.util.Cpf;
 import exception.DocumentAlreadyExistsException;
 import exception.EmailAlreadyExistsException;
 import exception.InvalidDocumentException;
@@ -40,8 +41,7 @@ public class PatientService {
     }
 
     public Patient createPatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException {
-        if(false) {
-            //todo verificar se cpf é valido
+        if(Cpf.validateCPF(patient.getDocument())) {
             throw new InvalidDocumentException("Document is invalid");
         }
         if (patientRepository.findOneByDocument(patient.getDocument()).isPresent()) {
@@ -55,11 +55,17 @@ public class PatientService {
         return patientRepository.save(patient);
     }
 
-    public Patient updatePatient(Patient patient) throws InvalidDocumentException {
-        if(false) {
-            //todo verificar se cpf é valido
+    public Patient updatePatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException {
+        if(Cpf.validateCPF(patient.getDocument())) {
             throw new InvalidDocumentException("Document is invalid");
         }
+        if (patientRepository.findOneByDocument(patient.getDocument()).isPresent()) {
+            throw new DocumentAlreadyExistsException("Document already exists");
+        }
+        if (patientRepository.findOneByEmail(patient.getEmail()).isPresent()) {
+            throw new EmailAlreadyExistsException("Email already exists");
+        }
+
         return patientRepository.save(patient);
     }
 
