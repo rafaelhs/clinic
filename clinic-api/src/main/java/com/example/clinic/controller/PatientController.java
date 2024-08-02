@@ -53,7 +53,7 @@ public class PatientController {
         } catch (EmailAlreadyExistsException e) {
             return new ResponseEntity<>("Email in use", HttpStatus.CONFLICT);
         } catch (DocumentAlreadyExistsException e) {
-            return new ResponseEntity<>("Document in user", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Document in use", HttpStatus.CONFLICT);
         }
     }
 
@@ -67,14 +67,24 @@ public class PatientController {
         } catch (EmailAlreadyExistsException e) {
             return new ResponseEntity<>("Email in use", HttpStatus.CONFLICT);
         } catch (DocumentAlreadyExistsException e) {
-            return new ResponseEntity<>("Document in user", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Document in use", HttpStatus.CONFLICT);
         }
     }
 
-    @GetMapping("/List")
+    @GetMapping("/list")
     public ResponseEntity<List<Patient>> getPatientList() {
         List<Patient> res = patientService.listPatient();
         return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> removeContact(@PathVariable("id") Long id) {
+        try{
+            Long res = patientService.removeContact(id);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>("Patient not Found", HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping(path = "/search")

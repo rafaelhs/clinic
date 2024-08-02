@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class PatientService {
     }
 
     public Patient createPatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException {
-        if(Cpf.validateCPF(patient.getDocument())) {
+        if(!Cpf.validateCPF(patient.getDocument())) {
             throw new InvalidDocumentException("Document is invalid");
         }
         if (patientRepository.findOneByDocument(patient.getDocument()).isPresent()) {
@@ -56,13 +57,15 @@ public class PatientService {
     }
 
     public Patient updatePatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException {
-        if(Cpf.validateCPF(patient.getDocument())) {
+        if(!Cpf.validateCPF(patient.getDocument())) {
             throw new InvalidDocumentException("Document is invalid");
         }
-        if (patientRepository.findOneByDocument(patient.getDocument()).isPresent()) {
+        Optional<Patient> patientAux = patientRepository.findOneByDocument(patient.getDocument());
+        if (!patientAux.isPresent() && patientAux.get().getId().equals(patient.getId())) {
             throw new DocumentAlreadyExistsException("Document already exists");
         }
-        if (patientRepository.findOneByEmail(patient.getEmail()).isPresent()) {
+        patientAux = patientRepository.findOneByEmail(patient.getEmail());
+        if (!patientAux.isPresent() && patientAux.get().getEmail().equals(patient.getEmail())) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
 
@@ -82,5 +85,12 @@ public class PatientService {
     ) {
         Pageable pageable = PageRequest.of(page, size, order, variable);
         return patientRepository.search("%" + search + "%", pageable);
+    }
+
+    public Long removeContact(Long id) throws NotFoundException {
+        Optional<Patient> patient = patientRepository.findById(id);
+        if(!patient.isPresent()) throw new NotFoundException("Patient not found");
+        patientRepository.delete(patient.get());
+        return id;
     }
 }
