@@ -3,18 +3,21 @@ package com.example.clinic.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "patients")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int sex;
+    @Column(unique = true)
     private String document;
     private String phone;
     private LocalDate dateOfBirth;
+    @Column(unique = true)
     private String email;
     private String address;
     private int number;
@@ -24,6 +27,7 @@ public class Patient {
     private String city;
     private String state;
     private String information;
+    private LocalDateTime createdAt;
 
     public Patient(){}
     public Patient(Long id,
@@ -40,7 +44,8 @@ public class Patient {
                    String zip,
                    String city,
                    String state,
-                   String information) {
+                   String information,
+                   LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -56,6 +61,7 @@ public class Patient {
         this.city = city;
         this.state = state;
         this.information = information;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -177,4 +183,13 @@ public class Patient {
     public void setInformation(String information) {
         this.information = information;
     }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
 }
