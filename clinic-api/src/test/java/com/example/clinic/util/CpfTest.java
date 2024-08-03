@@ -17,6 +17,18 @@ class CpfTest {
         assertFalse(Cpf.validateCPF("044.941.190-75"));
     }
     @Test
+    void ShouldFailIfEmptyCPF() {
+        assertFalse(Cpf.validateCPF(""));
+    }
+    @Test
+    void ShouldFailIfNull() {
+        assertFalse(Cpf.validateCPF(null));
+    }
+    @Test
+    void ShouldFailIfNotNumbersCPF() {
+        assertFalse(Cpf.validateCPF("0449A119075"));
+    }
+    @Test
     void shouldFailInvalidCPF() {
         assertFalse(Cpf.validateCPF("04494119070"));
     }

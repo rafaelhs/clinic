@@ -2,7 +2,7 @@ package com.example.clinic.util;
 
 public class Cpf {
     public static boolean validateCPF(String cpf) {
-        if(cpf.length() != 11) return false;
+        if(cpf == null || cpf.length() != 11) return false;
         if (cpf.equals("00000000000") || cpf.equals("11111111111") ||
                 cpf.equals("22222222222") || cpf.equals("33333333333") ||
                 cpf.equals("44444444444") || cpf.equals("55555555555") ||
