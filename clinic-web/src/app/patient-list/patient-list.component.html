@@ -1,0 +1,8 @@
+<div class="container">
+  <div *ngIf="patientList.length === 0">
+    <p>Nenhum paciente encontrado</p>
+  </div>
+  <div *ngFor="let patient of patientList; let i = index">
+    {{patient.id}}
+  </div>
+</div>
