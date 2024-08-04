@@ -1,1 +1,16 @@
-<p>patient-item works!</p>
+<mat-card class="patient-card clickable" appearance="outlined" (click)="handleClick()">
+  <div class="image-container">
+    <img class="image" src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+  </div>
+  <div class="text-container">
+    <div>
+      <p class="text">{{patient.name}}</p>
+    </div>
+    <div>
+      <p class="text">{{patient.document}}</p>
+    </div>
+    <div>
+      <p class="text">{{patient.email}}</p>
+    </div>
+  </div>
+</mat-card>

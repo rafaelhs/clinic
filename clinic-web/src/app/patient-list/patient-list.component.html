@@ -3,6 +3,8 @@
     <p>Nenhum paciente encontrado</p>
   </div>
   <div *ngFor="let patient of patientList; let i = index">
-    {{patient.id}}
+    <app-patient-item
+      [(patient)]="patientList[i]"
+    ></app-patient-item>
   </div>
 </div>
