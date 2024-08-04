@@ -1,0 +1,16 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.navbar {
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  border-color: var(--tertiary-color);
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--primary-color);
+}
