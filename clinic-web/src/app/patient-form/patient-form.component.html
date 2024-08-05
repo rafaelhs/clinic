@@ -1,2 +1,95 @@
-<p>patient-form works!</p>
-id: {{id}}
+<div class="container">
+
+  <section class="personal form-group">
+    <mat-form-field class="name">
+      <mat-label>Nome*</mat-label>
+      <input matInput [(ngModel)]="patient.name" />
+    </mat-form-field>
+
+    <mat-form-field class="sex">
+      <mat-label>Sexo</mat-label>
+      <mat-select [(ngModel)]="patient.sex" [(value)]="patient.sex">
+        <mat-option [value]=0>Desconhecido</mat-option>
+        <mat-option [value]=1>Masculino</mat-option>
+        <mat-option [value]=2>Feminino</mat-option>
+        <mat-option [value]=9>Não Aplicável</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+      <mat-form-field class="dob">
+        <mat-label>Data de Aniversário</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="patient.dateOfBirth">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <p>{{patient.dateOfBirth}}</p>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+      </mat-form-field>
+    
+    <mat-form-field class="document">
+      <mat-label>CPF</mat-label>
+      <input matInput [(ngModel)]="patient.document" />
+    </mat-form-field>
+
+  </section>
+
+  <section class="contact form-group">
+    <mat-form-field class="phone">
+      <mat-label>Telefone</mat-label>
+      <input matInput [(ngModel)]="patient.phone" />
+    </mat-form-field>
+    <mat-form-field class="email">
+      <mat-label>E-mail</mat-label>
+      <input matInput [(ngModel)]="patient.email" />
+    </mat-form-field>
+  </section>
+
+  <section class="address form-group">
+    <mat-form-field class="zip">
+      <mat-label>CEP</mat-label>
+      <input matInput [(ngModel)]="patient.zip" />
+    </mat-form-field>
+    <mat-form-field class="address">
+      <mat-label>Endereço*</mat-label>
+      <input matInput [(ngModel)]="patient.address" />
+    </mat-form-field>
+    <mat-form-field class="number">
+      <mat-label>nº</mat-label>
+      <input matInput [(ngModel)]="patient.number" />
+    </mat-form-field>
+    <mat-form-field class="district">
+      <mat-label>Bairro</mat-label>
+      <input matInput [(ngModel)]="patient.district" />
+    </mat-form-field>
+    <mat-form-field class="complement">
+      <mat-label>Complemento</mat-label>
+      <input matInput [(ngModel)]="patient.complement" />
+    </mat-form-field>
+    <mat-form-field class="city">
+      <mat-label>Cidade</mat-label>
+      <input matInput [(ngModel)]="patient.city" />
+    </mat-form-field>
+    <mat-form-field class="state">
+      <mat-label>Estado</mat-label>
+      <input matInput [(ngModel)]="patient.state" />
+    </mat-form-field>
+  </section>
+
+
+  <section class="info form-group">
+    <mat-form-field class="information">
+      <mat-label>Informações do Paciente</mat-label>
+      <textarea matInput [(ngModel)]="patient.information"></textarea>
+    </mat-form-field>
+  </section>
+  <mat-divider></mat-divider>
+  <section class="control">
+    <button mat-stroked-button (click)="handleSave()">Salvar</button>
+    <button mat-fab aria-label="delete" (click)="handleRemove()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-fab aria-label="return" (click)="handleReturn()">
+      <mat-icon>keyboard_return</mat-icon>
+    </button>
+  </section>
+
+</div>

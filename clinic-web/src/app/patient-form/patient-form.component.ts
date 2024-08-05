@@ -1,16 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PatientService } from '../services/patient.service';
+import { Patient } from '../models/patient';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-patient-form',
   standalone: true,
-  imports: [],
+  providers: [provideNativeDateAdapter()],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatButtonModule, MatDividerModule, MatIconModule],
   templateUrl: './patient-form.component.html',
   styleUrl: './patient-form.component.css'
 })
 export class PatientFormComponent implements OnInit{
-  id: any = "";
+  patient: any = new Patient(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 
   constructor(
@@ -21,7 +33,37 @@ export class PatientFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.id = params.get('id');
+      let id = params.get('id');
+      if(id) {
+        this.patientServices.getPatient(id).subscribe((patient: any) => {
+          this.patient = patient;
+        })
+      }
+      
+    })
+  }
+
+  handleReturn() {
+    this.router.navigate(['patients']);
+  }
+
+  handleSave() {
+    if(this.patient.id) {
+      console.log("1")
+      this.patientServices.updatePatient(this.patient).subscribe(() => {
+        this.router.navigate(['patients']);
+      })
+    } else {
+      console.log("2")
+      this.patientServices.createPatient(this.patient).subscribe(() => {
+        this.router.navigate(['patients']);
+      })
+    }
+  }
+
+  handleRemove() {
+    this.patientServices.removePatient(this.patient.id).subscribe(() => {
+      this.router.navigate(['patients']);
     })
   }
 }
