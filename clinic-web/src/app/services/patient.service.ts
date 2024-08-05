@@ -12,7 +12,6 @@ export class PatientService {
   constructor(private http: HttpClient) {}
 
   getPatients() {
-    console.log(url + '/patient/list')
     return this.http.get(url + '/patient/list');
   }
 

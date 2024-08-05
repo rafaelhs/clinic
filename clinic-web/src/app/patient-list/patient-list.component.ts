@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Patient } from '../models/patient';
 import { CommonModule } from '@angular/common';
 import { PatientService } from '../services/patient.service';
 import { PatientItemComponent } from "../patient-item/patient-item.component";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-patient-list',
@@ -12,18 +13,15 @@ import { PatientItemComponent } from "../patient-item/patient-item.component";
   styleUrl: './patient-list.component.css'
 })
 export class PatientListComponent implements OnInit {
-  @Input() patientList: Patient[] = [];
-  @Output() patientListChange = new EventEmitter<any[]>();
+  patientList: Patient[] = [];
 
   constructor(
-    private services: PatientService
-  ) {
-      this.services.getPatients().subscribe((patients: any) => {
-        this.patientList = patients;
-      });
-    }
-
-
+    private services: PatientService,
+  ) { }
+  
   ngOnInit(): void {
+    this.services.getPatients().subscribe((patients: any) => {
+      this.patientList = patients;
+    });
   }
 }
