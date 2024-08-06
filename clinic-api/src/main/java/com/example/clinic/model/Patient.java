@@ -16,7 +16,7 @@ public class Patient {
     @Column(unique = true)
     private String document;
     private String phone;
-    private LocalDate dateOfBirth;
+    private LocalDateTime dateOfBirth;
     @Column(unique = true)
     private String email;
     private String address;
@@ -35,7 +35,7 @@ public class Patient {
                    int sex,
                    String document,
                    String phone,
-                   LocalDate dateOfBirth,
+                   LocalDateTime dateOfBirth,
                    String email,
                    String address,
                    int number,
@@ -104,11 +104,11 @@ public class Patient {
         this.phone = phone;
     }
 
-    public LocalDate getDateOfBirth() {
+    public LocalDateTime getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(LocalDateTime dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
