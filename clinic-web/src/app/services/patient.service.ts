@@ -31,4 +31,11 @@ export class PatientService {
   removePatient(id: number) {
     return this.http.delete(url + '/patient/' + id);
   }
+
+  searchPatients(search: string, variable: string, order: string, page: number, size: number) {
+    return this.http.get(
+      url + '/patient/search', 
+      { params: { search, variable, order, page, size } }
+    );
+  }
 }
