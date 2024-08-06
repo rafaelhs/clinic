@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="title">
+    <div class="add form-group">
+      <button mat-fab class="add-button" (click)="handleAdd()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  
+    <div class="search form-group">
+      <mat-form-field class="search-input" appearance="outline">
+        <mat-label>Pesquisar</mat-label>
+        <input matInput [(ngModel)]="query" />
+      </mat-form-field>
+  
+      <button mat-fab aria-label="search" (click)="handleSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <div class="toggles">
+    <a 
+      [routerLink]="" 
+      class="toggle-button" 
+      [ngClass]="searchToggle === 'createdAt' 
+        ? 'toggled' 
+        : 'untoggled'" 
+      (click)="handleSearchToggle('createdAt')"
+    >
+      <mat-icon 
+        *ngIf="orderToggle === 'ASC' && searchToggle === 'createdAt'">
+        keyboard_arrow_up
+      </mat-icon>
+      <mat-icon 
+        *ngIf="orderToggle === 'DESC' && searchToggle === 'createdAt'">
+        keyboard_arrow_down
+      </mat-icon>
+      data
+
+    </a>
+
+    <a 
+      class="toggle-button" 
+      [ngClass]="searchToggle === 'name' 
+        ? 'toggled' 
+        : 'untoggled'" 
+      (click)="handleSearchToggle('name')"
+    >
+      <mat-icon 
+        *ngIf="orderToggle === 'ASC' && searchToggle === 'name'">
+        keyboard_arrow_up
+      </mat-icon>
+      <mat-icon 
+        *ngIf="orderToggle === 'DESC' && searchToggle === 'name'">
+        keyboard_arrow_down
+      </mat-icon>
+      nome
+      
+    </a>
+  </div>
+
+</div>

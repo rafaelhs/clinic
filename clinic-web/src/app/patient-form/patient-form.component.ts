@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PatientService } from '../services/patient.service';
 import { Patient } from '../models/patient';
+import { PatientSearchComponent } from '../patient-search/patient-search.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,7 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-patient-form',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatButtonModule, MatDividerModule, MatIconModule],
+  imports: [PatientSearchComponent, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatButtonModule, MatDividerModule, MatIconModule],
   templateUrl: './patient-form.component.html',
   styleUrl: './patient-form.component.css'
 })
@@ -49,12 +50,10 @@ export class PatientFormComponent implements OnInit{
 
   handleSave() {
     if(this.patient.id) {
-      console.log("1")
       this.patientServices.updatePatient(this.patient).subscribe(() => {
         this.router.navigate(['patients']);
       })
     } else {
-      console.log("2")
       this.patientServices.createPatient(this.patient).subscribe(() => {
         this.router.navigate(['patients']);
       })

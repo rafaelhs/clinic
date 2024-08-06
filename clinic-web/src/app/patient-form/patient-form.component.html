@@ -1,10 +1,15 @@
 <div class="container">
 
-  <section class="personal form-group">
+  <section class="title form-group">
     <mat-form-field class="name">
       <mat-label>Nome*</mat-label>
       <input matInput [(ngModel)]="patient.name" />
     </mat-form-field>
+  </section>
+
+  <mat-divider></mat-divider>
+
+  <section class="personal form-group">
 
     <mat-form-field class="sex">
       <mat-label>Sexo</mat-label>
@@ -32,6 +37,8 @@
 
   </section>
 
+  <mat-divider></mat-divider>
+
   <section class="contact form-group">
     <mat-form-field class="phone">
       <mat-label>Telefone</mat-label>
@@ -42,6 +49,8 @@
       <input matInput [(ngModel)]="patient.email" />
     </mat-form-field>
   </section>
+
+  <mat-divider></mat-divider>
 
   <section class="address form-group">
     <mat-form-field class="zip">
@@ -74,6 +83,7 @@
     </mat-form-field>
   </section>
 
+  <mat-divider></mat-divider>
 
   <section class="info form-group">
     <mat-form-field class="information">

@@ -1,4 +1,9 @@
 <div class="container">
+  <app-patient-search
+    [patientList]="patientList"
+    (patientListChange)="updateList($event)"
+  ></app-patient-search>
+
   <div *ngIf="patientList.length === 0">
     <p>Nenhum paciente encontrado</p>
   </div>
