@@ -1,15 +1,26 @@
 <div class="container">
   <app-patient-search
-    [patientList]="patientList"
-    (patientListChange)="updateList($event)"
+    (searchPatients)="handleSearchChange($event)"
   ></app-patient-search>
-
+  
   <div *ngIf="patientList.length === 0">
     <p>Nenhum paciente encontrado</p>
   </div>
+
   <div *ngFor="let patient of patientList; let i = index">
     <app-patient-item
-      [(patient)]="patientList[i]"
+    [(patient)]="patientList[i]"
     ></app-patient-item>
   </div>
+  
+  <div *ngIf="patientList.length > 0">
+    <app-pagination
+      [length]="totalElements"
+      [size]="size"
+      [page]="page"
+      (pageChange)="handlePageChange($event)"
+    >
+    </app-pagination>
+  </div>
+
 </div>

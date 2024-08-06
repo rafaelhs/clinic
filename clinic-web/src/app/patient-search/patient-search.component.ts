@@ -1,13 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { PatientService } from '../services/patient.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Patient } from '../models/patient';
  
 
 @Component({
@@ -18,27 +16,20 @@ import { Patient } from '../models/patient';
   styleUrl: './patient-search.component.scss'
 })
 export class PatientSearchComponent implements OnInit{
-  @Input() patientList: Patient[] = [];
-  @Output() patientListChange = new EventEmitter<any[]>();
-
-  query: string = "";
+  @Output() searchPatients = new EventEmitter<any>();
   searchToggle: string = "name";
   orderToggle: string = "ASC";
-  page: number = 0;
-  size: number = 100;
+  query: string = "";
+
 
   constructor(
-    private patientServices: PatientService,
     private router: Router
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     
   }
 
-  updateContactList(patientList: any[]) {
-    this.patientList = patientList;
-    this.patientListChange.emit(this.patientList);
+  ngOnInit(): void {
+    this.handleSearch();
   }
 
   handleAdd() {
@@ -46,10 +37,10 @@ export class PatientSearchComponent implements OnInit{
   }
 
   handleSearch() {
-    this.patientServices.searchPatients(this.query, this.searchToggle, this.orderToggle, this.page, this.size)
-    .subscribe((patients: any) => {
-      this.updateContactList(patients.content);
-    })
+    this.searchPatients.emit({
+      query: this.query, 
+      searchToggle: this.searchToggle, 
+      orderToggle: this.orderToggle});
   }
 
   handleSearchToggle(variable: string) {
