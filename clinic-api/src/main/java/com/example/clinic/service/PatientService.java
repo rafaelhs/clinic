@@ -61,11 +61,11 @@ public class PatientService {
             throw new InvalidDocumentException("Document is invalid");
         }
         Optional<Patient> patientAux = patientRepository.findOneByDocument(patient.getDocument());
-        if (!patientAux.isPresent() && patientAux.get().getId().equals(patient.getId())) {
+        if (patientAux.isPresent() && !patientAux.get().getId().equals(patient.getId())) {
             throw new DocumentAlreadyExistsException("Document already exists");
         }
         patientAux = patientRepository.findOneByEmail(patient.getEmail());
-        if (!patientAux.isPresent() && patientAux.get().getEmail().equals(patient.getEmail())) {
+        if (patientAux.isPresent() && !patientAux.get().getEmail().equals(patient.getEmail())) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
 
