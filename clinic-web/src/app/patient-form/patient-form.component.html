@@ -2,7 +2,7 @@
 
   <section class="title form-group">
     <mat-form-field class="name">
-      <mat-label>Nome*</mat-label>
+      <mat-label>Nome</mat-label>
       <input matInput [(ngModel)]="patient.name" />
     </mat-form-field>
   </section>
@@ -32,7 +32,7 @@
     
     <mat-form-field class="document">
       <mat-label>CPF</mat-label>
-      <input matInput [(ngModel)]="patient.document" />
+      <input matInput [(ngModel)]="patient.document"  mask="000.000.000-00"/>
     </mat-form-field>
 
   </section>
@@ -42,7 +42,7 @@
   <section class="contact form-group">
     <mat-form-field class="phone">
       <mat-label>Telefone</mat-label>
-      <input matInput [(ngModel)]="patient.phone" />
+      <input matInput [(ngModel)]="patient.phone" mask="(00) 0 0000-0000"/>
     </mat-form-field>
     <mat-form-field class="email">
       <mat-label>E-mail</mat-label>
@@ -55,10 +55,10 @@
   <section class="address form-group">
     <mat-form-field class="zip">
       <mat-label>CEP</mat-label>
-      <input matInput [(ngModel)]="patient.zip" />
+      <input matInput [(ngModel)]="patient.zip" mask="00000-000"/>
     </mat-form-field>
     <mat-form-field class="address">
-      <mat-label>Endereço*</mat-label>
+      <mat-label>Endereço</mat-label>
       <input matInput [(ngModel)]="patient.address" />
     </mat-form-field>
     <mat-form-field class="number">

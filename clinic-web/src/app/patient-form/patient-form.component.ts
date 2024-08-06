@@ -13,12 +13,13 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-patient-form',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [PatientSearchComponent, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatButtonModule, MatDividerModule, MatIconModule],
+  imports: [NgxMaskDirective, NgxMaskPipe, PatientSearchComponent, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatButtonModule, MatDividerModule, MatIconModule],
   templateUrl: './patient-form.component.html',
   styleUrl: './patient-form.component.css'
 })
