@@ -1,103 +1,151 @@
-<div class="container">
+<form class="container" [formGroup]="patientForm" (ngSubmit)="handleSubmit()">
 
-  <section class="title form-group">
+  <div class="title form-group">
     <mat-form-field class="name">
       <mat-label>Nome</mat-label>
-      <input matInput [(ngModel)]="patient.name" />
+      <input matInput 
+        formControlName="name"
+      />
+      @if (patientForm.get("name")!.hasError('required')) {
+        <mat-error>Campo Obrigatório</mat-error>
+      }
     </mat-form-field>
-  </section>
+  </div>
 
   <mat-divider></mat-divider>
 
-  <section class="personal form-group">
+  <div class="personal form-group">
 
     <mat-form-field class="sex">
       <mat-label>Sexo</mat-label>
-      <mat-select [(ngModel)]="patient.sex" [(value)]="patient.sex">
+      <mat-select 
+        formControlName="sex"
+      >
         <mat-option [value]=0>Desconhecido</mat-option>
         <mat-option [value]=1>Masculino</mat-option>
         <mat-option [value]=2>Feminino</mat-option>
         <mat-option [value]=9>Não Aplicável</mat-option>
       </mat-select>
+      @if (patientForm.get("sex")!.hasError('required')) {
+        <mat-error *ngIf>Campo Obrigatório</mat-error>
+      }
     </mat-form-field>
 
-      <mat-form-field class="dob">
+      <mat-form-field class="dateOfBirth">
         <mat-label>Data de Nascimento</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="patient.dateOfBirth">
+        <input matInput [matDatepicker]="picker"
+          formControlName="dateOfBirth"
+        >
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker ></mat-datepicker>
+        <mat-datepicker #picker></mat-datepicker>
+        @if (patientForm.get("dateOfBirth")!.hasError('required')) {
+          <mat-error>Campo Obrigatório</mat-error>
+        }
       </mat-form-field>
     
     <mat-form-field class="document">
       <mat-label>CPF</mat-label>
-      <input matInput [(ngModel)]="patient.document"  mask="000.000.000-00"/>
+      <input matInput 
+        formControlName="document" 
+        mask="000.000.000-00"
+      />
+      @if (patientForm.get("document")!.hasError('inUse')) {
+        <mat-error>CPF em uso</mat-error>
+      } @else if (patientForm.get("document")!.hasError('required')) {
+        <mat-error>Campo Obrigatório</mat-error>
+      } @else if (patientForm.get("document")!.hasError('cpf')) {
+        <mat-error>CPF Inválido</mat-error>
+      }
     </mat-form-field>
-
-  </section>
-
+  </div>
   <mat-divider></mat-divider>
-
-  <section class="contact form-group">
+  
+  <div class="contact form-group">
     <mat-form-field class="phone">
       <mat-label>Telefone</mat-label>
-      <input matInput [(ngModel)]="patient.phone" mask="(00) 0 0000-0000"/>
+      <input matInput 
+        formControlName="phone" 
+        mask="(00) 0 0000-0000"
+      />
+      @if (patientForm.get("phone")!.hasError('required')) {
+        <mat-error>Campo Obrigatório</mat-error>
+      }
     </mat-form-field>
     <mat-form-field class="email">
       <mat-label>E-mail</mat-label>
-      <input matInput [(ngModel)]="patient.email" />
+      <input matInput 
+        formControlName="email" 
+      />
+      @if (patientForm.get("email")!.hasError('inUse')) {
+        <mat-error>Email em uso</mat-error>
+      } @else if (patientForm.get("email")!.hasError('required')) {
+        <mat-error>Campo Obrigatório</mat-error>
+      } @else if (patientForm.get("email")!.hasError('email')) {
+        <mat-error>Email Inválido</mat-error>
+      }
+
     </mat-form-field>
-  </section>
-
+  </div>
+  
   <mat-divider></mat-divider>
-
-  <section class="address form-group">
+  
+  <div class="address form-group">
     <mat-form-field class="zip">
       <mat-label>CEP</mat-label>
-      <input matInput [(ngModel)]="patient.zip" mask="00000-000"/>
+      <input matInput 
+      formControlName="zip" 
+        mask="00000-000"
+      />
     </mat-form-field>
     <mat-form-field class="address">
       <mat-label>Endereço</mat-label>
-      <input matInput [(ngModel)]="patient.address" />
+      <input matInput formControlName="address" />
     </mat-form-field>
     <mat-form-field class="number">
       <mat-label>nº</mat-label>
-      <input matInput [(ngModel)]="patient.number" />
+      <input matInput formControlName="number" />
     </mat-form-field>
     <mat-form-field class="district">
       <mat-label>Bairro</mat-label>
-      <input matInput [(ngModel)]="patient.district" />
+      <input matInput formControlName="district" />
     </mat-form-field>
     <mat-form-field class="complement">
       <mat-label>Complemento</mat-label>
-      <input matInput [(ngModel)]="patient.complement" />
+      <input matInput formControlName="complement" />
     </mat-form-field>
     <mat-form-field class="city">
       <mat-label>Cidade</mat-label>
-      <input matInput [(ngModel)]="patient.city" />
+      <input matInput formControlName="city" />
     </mat-form-field>
     <mat-form-field class="state">
       <mat-label>Estado</mat-label>
-      <input matInput [(ngModel)]="patient.state" mask="UU"  oninput="this.value = this.value.toUpperCase()"/>
+      <input matInput 
+        formControlName="state"
+        mask="UU"  
+        oninput="this.value = this.value.toUpperCase()"
+        />
     </mat-form-field>
-  </section>
+  </div>
 
   <mat-divider></mat-divider>
 
-  <section class="info form-group">
+  <div class="info form-group">
     <mat-form-field class="information">
       <mat-label>Informações do Paciente</mat-label>
-      <textarea matInput [(ngModel)]="patient.information"></textarea>
+      <textarea matInput formControlName="information"></textarea>
     </mat-form-field>
-  </section>
+  </div>
+  
   <mat-divider></mat-divider>
-  <section class="control">
-    <button mat-stroked-button (click)="handleSave()">Salvar</button>
+  
+  <div class="control">
+    <button mat-stroked-button type="submit">Salvar</button>
     <button mat-fab aria-label="delete" (click)="handleRemove()">
       <mat-icon>delete</mat-icon>
     </button>
-    <button mat-fab aria-label="return" (click)="handleReturn()">
+    <button mat-fab aria-label="return" type="button" (click)="handleReturn()">
       <mat-icon>keyboard_return</mat-icon>
     </button>
-  </section>
+  </div>
 
-</div>
+</form>
