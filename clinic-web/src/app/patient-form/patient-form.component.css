@@ -3,11 +3,22 @@
   margin: auto;
   margin-top: 50px;
   background-color: var(--background-light);
-  padding: 50px 40px 15px 40px;
+  padding: 20px 40px 15px 40px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
+}
+
+.header-control {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  .return-button {
+    height: 35px;
+    width: 35px;
+  }
 }
 
 .form-group {
@@ -20,4 +31,87 @@
   margin: 5px 0 5px 0;
   padding: 5px;
 
+}
+
+.title {
+  .name {
+    width: 100%;
+  }
+}
+
+.personal {
+  display: flex;
+  flex-direction: row;
+  .document {
+    width: 150px;
+  }
+  .sex, .dateOfBirth {
+    width: 170px;
+  }
+
+}
+
+.contact {
+  display: flex;
+  gap: 10px;
+  justify-content: left;
+
+  .phone {
+    width: 200px;
+  }
+  .email {
+    width: 380px;
+  }
+}
+
+.address-group {
+  display: flex;
+  gap: 10px;
+  justify-content: left;
+
+  .zip {
+    width: 150px;
+  }
+  .address {
+    width: 370px;
+  }
+  .number {
+    width: 50px;
+  }
+  .district {
+    width: 200px;
+  }
+  .complement {
+    width: 380px;
+  }
+  .geo{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    .state {
+      width: 70px;
+    }
+  }
+}
+
+.info {
+  .information {
+    width: 100%;
+  }
+  textarea {
+    height: 100px;
+  }
+}
+
+.footer-control {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  .delete-button {
+    background-color: var(--warn-light);
+    color: var(--warn-color);
+    width: 35px;
+    height: 35px;
+  }
 }

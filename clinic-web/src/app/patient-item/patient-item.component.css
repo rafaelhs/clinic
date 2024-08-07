@@ -1,5 +1,5 @@
 .patient-card {
-  width: 350px;
+  width: 400px;
   border: 1px solid var(--accent-color);
   border-radius: 8px;
   overflow: hidden;
@@ -14,7 +14,7 @@
 .image {
   width: 100px;
   height: 100px;
-  margin: 5px;
+  margin: 5px 10px 5px 5px;
 }
 
 .text-container {

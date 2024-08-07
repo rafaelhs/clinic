@@ -6,7 +6,8 @@
   --tertiary-color: #40534C;
   --accent-color: #B2A59B;
   --background-light: #f8f7f5;
-  --warn-color: blue;
+  --warn-color: #ff1e00;
+  --warn-light: #ecd9ce;
 }
 
 html, body { height: 100%; background-color: #607274;}

@@ -27,4 +27,9 @@ export class PatientItemComponent implements OnInit{
   handleClick() {
     this.router.navigate(['patient', this.patient.id]);
   }
+
+  documentFormat(document: string){
+    return document.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+  }
+  
 }

@@ -1,5 +1,9 @@
 <form class="container" [formGroup]="patientForm" (ngSubmit)="handleSubmit()">
-
+  <div class="header-control">
+    <button mat-fab aria-label="return" type="button" class="return-button" (click)="handleReturn()">
+      <mat-icon>keyboard_return</mat-icon>
+    </button>
+  </div>
   <div class="title form-group">
     <mat-form-field class="name">
       <mat-label>Nome</mat-label>
@@ -89,7 +93,7 @@
   
   <mat-divider></mat-divider>
   
-  <div class="address form-group">
+  <div class="address-group form-group">
     <mat-form-field class="zip">
       <mat-label>CEP</mat-label>
       <input matInput 
@@ -113,18 +117,20 @@
       <mat-label>Complemento</mat-label>
       <input matInput formControlName="complement" />
     </mat-form-field>
-    <mat-form-field class="city">
-      <mat-label>Cidade</mat-label>
-      <input matInput formControlName="city" />
-    </mat-form-field>
-    <mat-form-field class="state">
-      <mat-label>Estado</mat-label>
-      <input matInput 
-        formControlName="state"
-        mask="UU"  
-        oninput="this.value = this.value.toUpperCase()"
-        />
-    </mat-form-field>
+    <section class="geo">
+      <mat-form-field class="city">
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="city" />
+      </mat-form-field>
+      <mat-form-field class="state">
+        <mat-label>Estado</mat-label>
+        <input matInput 
+          formControlName="state"
+          mask="UU"  
+          oninput="this.value = this.value.toUpperCase()"
+          />
+      </mat-form-field>
+    </section>
   </div>
 
   <mat-divider></mat-divider>
@@ -138,14 +144,11 @@
   
   <mat-divider></mat-divider>
   
-  <div class="control">
-    <button mat-stroked-button type="submit">Salvar</button>
-    <button mat-fab aria-label="delete" (click)="handleRemove()">
+  <div class="footer-control">
+    <button *ngIf="patient.id" mat-fab aria-label="delete" class="delete-button" (click)="handleRemove()">
       <mat-icon>delete</mat-icon>
     </button>
-    <button mat-fab aria-label="return" type="button" (click)="handleReturn()">
-      <mat-icon>keyboard_return</mat-icon>
-    </button>
+    <button mat-stroked-button type="submit">Salvar</button>
   </div>
 
 </form>
