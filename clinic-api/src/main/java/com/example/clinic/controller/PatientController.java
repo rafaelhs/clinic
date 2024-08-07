@@ -1,5 +1,6 @@
 package com.example.clinic.controller;
 
+import com.example.clinic.model.ApiError;
 import com.example.clinic.model.Patient;
 import com.example.clinic.service.PatientService;
 import exception.DocumentAlreadyExistsException;
@@ -8,8 +9,6 @@ import exception.InvalidDocumentException;
 import exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +33,14 @@ public class PatientController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Patient> getPatient(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> getPatient(@PathVariable("id") Long id) {
         try{
             Patient res = patientService.getPatient(id);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (NotFoundException e) {
-            return ResponseEntity.badRequest().body(null);
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.NOT_FOUND, "not found"),
+                    HttpStatus.NOT_FOUND);
         }
     }
 
@@ -49,11 +50,17 @@ public class PatientController {
             Patient res = patientService.createPatient(patient);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (InvalidDocumentException e) {
-            return new ResponseEntity<>("Document is invalid", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.BAD_REQUEST, "document invalid"),
+                    HttpStatus.BAD_REQUEST);
         } catch (EmailAlreadyExistsException e) {
-            return new ResponseEntity<>("Email in use", HttpStatus.CONFLICT);
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.CONFLICT, "email in use"),
+                    HttpStatus.CONFLICT);
         } catch (DocumentAlreadyExistsException e) {
-            return new ResponseEntity<>("Document in use", HttpStatus.CONFLICT);
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.CONFLICT, "document in use"),
+                    HttpStatus.CONFLICT);
         }
     }
 
@@ -63,11 +70,17 @@ public class PatientController {
             Patient res = patientService.updatePatient(patient);
             return ResponseEntity.ok().body(res);
         } catch (InvalidDocumentException e) {
-            return new ResponseEntity<>("Document is invalid", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.BAD_REQUEST, "document invalid"),
+                    HttpStatus.BAD_REQUEST);
         } catch (EmailAlreadyExistsException e) {
-            return new ResponseEntity<>("Email in use", HttpStatus.CONFLICT);
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.CONFLICT, "email in use"),
+                    HttpStatus.CONFLICT);
         } catch (DocumentAlreadyExistsException e) {
-            return new ResponseEntity<>("Document in use", HttpStatus.CONFLICT);
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.CONFLICT, "document in use"),
+                    HttpStatus.CONFLICT);
         }
     }
 
@@ -83,7 +96,9 @@ public class PatientController {
             Long res = patientService.removeContact(id);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<>("Patient not Found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.NOT_FOUND, "not found"),
+                    HttpStatus.NOT_FOUND);
         }
     }
 
