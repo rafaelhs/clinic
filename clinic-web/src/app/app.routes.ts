@@ -7,5 +7,6 @@ export const routes: Routes = [
   {path: 'patients', component: PatientListComponent},
   {path: 'patient/:id', component: PatientFormComponent},
   {path: 'patient', component: PatientFormComponent},
-  {path: '**', component: NotFoundComponent}
+  {path: '', component: PatientListComponent},
+  {path: '**', component: NotFoundComponent},
 ];
