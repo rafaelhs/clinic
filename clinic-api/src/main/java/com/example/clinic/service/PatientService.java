@@ -65,7 +65,7 @@ public class PatientService {
             throw new DocumentAlreadyExistsException("Document already exists");
         }
         patientAux = patientRepository.findOneByEmail(patient.getEmail());
-        if (patientAux.isPresent() && !patientAux.get().getEmail().equals(patient.getEmail())) {
+        if (patientAux.isPresent() && !patientAux.get().getId().equals(patient.getId())) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
 
