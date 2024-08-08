@@ -1,4 +1,4 @@
-# Clínica Back-end
+# Clínica Backend
 
 ## Introdução
 Esse projeto implementa uma API Rest para uma clínica médica.
