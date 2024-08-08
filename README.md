@@ -1,4 +1,4 @@
-# Clinica
+# Clínica
 Sistema fullstack para uma clínica médica.
 
 Verifique o arquivo *README.md* de cada projeto para informações mais específicas
