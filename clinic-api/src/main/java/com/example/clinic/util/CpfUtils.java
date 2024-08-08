@@ -1,6 +1,6 @@
 package com.example.clinic.util;
 
-public class Cpf {
+public class CpfUtils {
     public static boolean validateCPF(String cpf) {
         if(cpf == null || cpf.length() != 11) return false;
         if (cpf.equals("00000000000") || cpf.equals("11111111111") ||

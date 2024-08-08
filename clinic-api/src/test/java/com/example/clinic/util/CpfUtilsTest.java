@@ -5,49 +5,49 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest()
-class CpfTest {
+class CpfUtilsTest {
 
 
     @Test
     void shouldValidateCPF() {
-        assertTrue(Cpf.validateCPF("04494119075"));
+        assertTrue(CpfUtils.validateCPF("04494119075"));
     }
     @Test
     void ShouldFailUntreatedStringCPF() {
-        assertFalse(Cpf.validateCPF("044.941.190-75"));
+        assertFalse(CpfUtils.validateCPF("044.941.190-75"));
     }
     @Test
     void ShouldFailIfEmptyCPF() {
-        assertFalse(Cpf.validateCPF(""));
+        assertFalse(CpfUtils.validateCPF(""));
     }
     @Test
     void ShouldFailIfNull() {
-        assertFalse(Cpf.validateCPF(null));
+        assertFalse(CpfUtils.validateCPF(null));
     }
     @Test
     void ShouldFailIfNotNumbersCPF() {
-        assertFalse(Cpf.validateCPF("0449A119075"));
+        assertFalse(CpfUtils.validateCPF("0449A119075"));
     }
     @Test
     void shouldFailInvalidCPF() {
-        assertFalse(Cpf.validateCPF("04494119070"));
+        assertFalse(CpfUtils.validateCPF("04494119070"));
     }
 
     @Test
     void shouldFailTooShortCPF() {
-        assertFalse(Cpf.validateCPF("0449411907"));
+        assertFalse(CpfUtils.validateCPF("0449411907"));
     }
     @Test
     void shouldFailTooLongCPF() {
-        assertFalse(Cpf.validateCPF("044941190751"));
+        assertFalse(CpfUtils.validateCPF("044941190751"));
     }
     @Test
     void ShouldFailKnownInvalidCPF() {
-        assertFalse(Cpf.validateCPF("1111111111"));
+        assertFalse(CpfUtils.validateCPF("1111111111"));
     }
     @Test
     void ShouldFailKnownInvalidCPF2() {
-        assertFalse(Cpf.validateCPF("3333333333"));
+        assertFalse(CpfUtils.validateCPF("3333333333"));
     }
 
 }
