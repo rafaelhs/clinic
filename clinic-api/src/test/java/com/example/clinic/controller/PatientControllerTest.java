@@ -67,6 +67,21 @@ class PatientControllerTest {
                 .andExpect(status().isBadRequest());
     }
     @Test
+    void shouldThrowEmailInvalidExceptionCreate() throws Exception {
+        Patient patient = new Patient();
+        patient.setId(Long.valueOf(1));
+        patient.setDocument("95105857002");
+        patient.setEmail("email Test@test.com");
+
+        String requestBody = new ObjectMapper().valueToTree(patient).toString();
+
+        this.mockMvc.perform(post("/patient/create")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+    @Test
     void shouldThrowDocumentConflictExceptionCreate() throws Exception {
         Patient patient = new Patient();
         patient.setId(Long.valueOf(1));
@@ -137,6 +152,21 @@ class PatientControllerTest {
         patient.setId(Long.valueOf(1));
         patient.setDocument("95105857002");
         patient.setEmail("emailTest@test.com");
+
+        String requestBody = new ObjectMapper().valueToTree(patient).toString();
+
+        this.mockMvc.perform(post("/patient/update")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+    @Test
+    void shouldThrowEmailInvalidExceptionUpdate() throws Exception {
+        Patient patient = new Patient();
+        patient.setId(Long.valueOf(1));
+        patient.setDocument("95105857002");
+        patient.setEmail("email Test@test.com");
 
         String requestBody = new ObjectMapper().valueToTree(patient).toString();
 

@@ -3,10 +3,8 @@ package com.example.clinic.service;
 import com.example.clinic.model.Patient;
 import com.example.clinic.repository.PatientRepository;
 import com.example.clinic.util.CpfUtils;
-import exception.DocumentAlreadyExistsException;
-import exception.EmailAlreadyExistsException;
-import exception.InvalidDocumentException;
-import exception.NotFoundException;
+import com.example.clinic.util.EmailUtils;
+import exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,9 +36,12 @@ public class PatientService {
         return patient.get();
     }
 
-    public Patient createPatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException {
+    public Patient createPatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException, InvalidEmailException {
         if(!CpfUtils.validateCPF(patient.getDocument())) {
             throw new InvalidDocumentException("Document is invalid");
+        }
+        if(!EmailUtils.validateEmail(patient.getEmail())) {
+            throw new InvalidEmailException("Document is invalid");
         }
         if (patientRepository.findOneByDocument(patient.getDocument()).isPresent()) {
             throw new DocumentAlreadyExistsException("Document already exists");

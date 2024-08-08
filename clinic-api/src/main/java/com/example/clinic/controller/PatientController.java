@@ -3,10 +3,7 @@ package com.example.clinic.controller;
 import com.example.clinic.model.ApiError;
 import com.example.clinic.model.Patient;
 import com.example.clinic.service.PatientService;
-import exception.DocumentAlreadyExistsException;
-import exception.EmailAlreadyExistsException;
-import exception.InvalidDocumentException;
-import exception.NotFoundException;
+import exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -52,6 +49,10 @@ public class PatientController {
         } catch (InvalidDocumentException e) {
             return new ResponseEntity<>(
                     new ApiError(HttpStatus.BAD_REQUEST, "document invalid"),
+                    HttpStatus.BAD_REQUEST);
+        } catch (InvalidEmailException e) {
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.BAD_REQUEST, "email invalid"),
                     HttpStatus.BAD_REQUEST);
         } catch (EmailAlreadyExistsException e) {
             return new ResponseEntity<>(
