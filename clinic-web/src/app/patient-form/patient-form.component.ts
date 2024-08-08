@@ -43,6 +43,7 @@ export class PatientFormComponent implements OnInit{
     city: new FormControl(null),
     state: new FormControl(null),
     information: new FormControl(null),
+    createdAt: new FormControl(null),
   })
 
 
@@ -76,6 +77,7 @@ export class PatientFormComponent implements OnInit{
             city: [this.patient.city],
             state: [this.patient.state],
             information: [this.patient.information],
+            createdAt: [this.patient.createdAt],
           })
         })
       }
