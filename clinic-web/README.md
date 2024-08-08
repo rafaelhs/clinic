@@ -1,4 +1,4 @@
-# Clinica Frontend
+# Clínica Frontend
 
 ## Introdução
 Esse projeto implementa a interface web para uma clínica médica.
