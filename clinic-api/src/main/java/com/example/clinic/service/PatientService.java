@@ -2,21 +2,18 @@ package com.example.clinic.service;
 
 import com.example.clinic.model.Patient;
 import com.example.clinic.repository.PatientRepository;
-import com.example.clinic.util.Cpf;
+import com.example.clinic.util.CpfUtils;
 import exception.DocumentAlreadyExistsException;
 import exception.EmailAlreadyExistsException;
 import exception.InvalidDocumentException;
 import exception.NotFoundException;
-import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +39,7 @@ public class PatientService {
     }
 
     public Patient createPatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException {
-        if(!Cpf.validateCPF(patient.getDocument())) {
+        if(!CpfUtils.validateCPF(patient.getDocument())) {
             throw new InvalidDocumentException("Document is invalid");
         }
         if (patientRepository.findOneByDocument(patient.getDocument()).isPresent()) {
@@ -57,7 +54,7 @@ public class PatientService {
     }
 
     public Patient updatePatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException {
-        if(!Cpf.validateCPF(patient.getDocument())) {
+        if(!CpfUtils.validateCPF(patient.getDocument())) {
             throw new InvalidDocumentException("Document is invalid");
         }
         Optional<Patient> patientAux = patientRepository.findOneByDocument(patient.getDocument());
