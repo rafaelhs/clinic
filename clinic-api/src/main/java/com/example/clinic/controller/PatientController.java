@@ -24,11 +24,6 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @RequestMapping(path = "/")
-    public @ResponseBody String ping() {
-        return patientService.message();
-    }
-
     @GetMapping(path = "/{id}")
     public ResponseEntity<Object> getPatient(@PathVariable("id") Long id) {
         try{
@@ -73,6 +68,10 @@ public class PatientController {
         } catch (InvalidDocumentException e) {
             return new ResponseEntity<>(
                     new ApiError(HttpStatus.BAD_REQUEST, "document invalid"),
+                    HttpStatus.BAD_REQUEST);
+        } catch (InvalidEmailException e) {
+            return new ResponseEntity<>(
+                    new ApiError(HttpStatus.BAD_REQUEST, "email invalid"),
                     HttpStatus.BAD_REQUEST);
         } catch (EmailAlreadyExistsException e) {
             return new ResponseEntity<>(

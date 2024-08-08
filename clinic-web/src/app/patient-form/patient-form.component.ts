@@ -98,6 +98,8 @@ export class PatientFormComponent implements OnInit{
       error: (data) => {
         if(data.error.message === "document invalid") {
           this.patientForm.get('document')!.setErrors({ cpf: true});
+        }else if(data.error.message === "email invalid") {
+          this.patientForm.get('document')!.setErrors({ email: true});
         } else if(data.error.message === "document in use") {
           this.patientForm.get('document')!.setErrors({ inUse: true});
         } else if(data.error.message === "email  in use") {

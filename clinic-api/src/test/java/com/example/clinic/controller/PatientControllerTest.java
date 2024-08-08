@@ -17,6 +17,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -70,7 +71,7 @@ class PatientControllerTest {
     void shouldThrowEmailInvalidExceptionCreate() throws Exception {
         Patient patient = new Patient();
         patient.setId(Long.valueOf(1));
-        patient.setDocument("95105857002");
+        patient.setDocument("95105857003");
         patient.setEmail("email Test@test.com");
 
         String requestBody = new ObjectMapper().valueToTree(patient).toString();
@@ -165,7 +166,7 @@ class PatientControllerTest {
     void shouldThrowEmailInvalidExceptionUpdate() throws Exception {
         Patient patient = new Patient();
         patient.setId(Long.valueOf(1));
-        patient.setDocument("95105857002");
+        patient.setDocument("95105857003");
         patient.setEmail("email Test@test.com");
 
         String requestBody = new ObjectMapper().valueToTree(patient).toString();

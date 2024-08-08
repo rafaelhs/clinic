@@ -54,9 +54,12 @@ public class PatientService {
         return patientRepository.save(patient);
     }
 
-    public Patient updatePatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException {
+    public Patient updatePatient(Patient patient) throws InvalidDocumentException, DocumentAlreadyExistsException, EmailAlreadyExistsException, InvalidEmailException {
         if(!CpfUtils.validateCPF(patient.getDocument())) {
             throw new InvalidDocumentException("Document is invalid");
+        }
+        if(!EmailUtils.validateEmail(patient.getEmail())) {
+            throw new InvalidEmailException("Document is invalid");
         }
         Optional<Patient> patientAux = patientRepository.findOneByDocument(patient.getDocument());
         if (patientAux.isPresent() && !patientAux.get().getId().equals(patient.getId())) {
