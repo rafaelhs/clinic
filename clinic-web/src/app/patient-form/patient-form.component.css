@@ -89,7 +89,7 @@
     justify-content: flex-start;
     gap: 10px;
     .state {
-      width: 70px;
+      width: 90px;
     }
   }
 }

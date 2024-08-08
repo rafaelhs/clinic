@@ -19,7 +19,7 @@ export class PatientListComponent implements OnInit {
   searchToggle: string = "name";
   orderToggle: string = "ASC";
   page: number = 0;
-  size: number = 2;
+  size: number = 5;
   totalElements: number = 0;
   
   constructor(

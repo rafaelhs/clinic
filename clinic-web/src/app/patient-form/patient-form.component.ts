@@ -141,6 +141,12 @@ export class PatientFormComponent implements OnInit{
       } else {
         this.handleCreate();
     }
+  } else {
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
   }
 }
