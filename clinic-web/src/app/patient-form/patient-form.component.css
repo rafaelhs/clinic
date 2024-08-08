@@ -105,7 +105,7 @@
 
 .footer-control {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
   margin-top: 20px;
   .delete-button {
@@ -113,5 +113,10 @@
     color: var(--warn-color);
     width: 35px;
     height: 35px;
+  }
+  .delete-confirm {
+    background-color: var(--warn-light);
+    color: var(--warn-color);
+    border-color: var(--warn-color);
   }
 }

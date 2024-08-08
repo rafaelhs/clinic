@@ -46,6 +46,8 @@ export class PatientFormComponent implements OnInit{
     createdAt: new FormControl(null),
   })
 
+  deleteState: boolean = false;
+
 
 
   constructor(
@@ -132,10 +134,15 @@ export class PatientFormComponent implements OnInit{
   }
 
   handleRemove() {
-    let patient = {...this.patientForm.value};
-    this.patientServices.removePatient(patient.id).subscribe(() => {
-      this.router.navigate(['patients']);
-    })
+    if(this.deleteState) {
+      let patient = {...this.patientForm.value};
+      this.patientServices.removePatient(patient.id).subscribe(() => {
+        this.router.navigate(['patients']);
+      })
+    } else {
+      this.deleteState = !this.deleteState;
+    }
+
   }
 
   handleSubmit() {
