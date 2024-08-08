@@ -1,5 +1,5 @@
 # Clinica
-Sistema full stack para uma clínica médica.
+Sistema fullstack para uma clínica médica.
 
 Verifique o arquivo *README.md* de cada projeto para informações mais específicas
 
@@ -10,7 +10,7 @@ Desenvolvido em Spring Boot, usando Postgres como banco de dados
 **Spring 3.3.2**
 
 
-# Fronend
+# Frontend
 Desenvolvido em Angular
 
 **Node 10.8.1**
