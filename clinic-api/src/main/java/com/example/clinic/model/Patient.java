@@ -10,14 +10,18 @@ import java.time.LocalDateTime;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private int sex;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String document;
     private String phone;
+    @Column(nullable = false)
     private LocalDateTime dateOfBirth;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
     private String address;
     private int number;
